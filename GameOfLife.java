@@ -17,9 +17,15 @@ public class GameOfLife{
         System.out.println("Enter Generations: ");
         generations = sc.nextInt();
 
-        for (int i = 0; i < 4; i++){
-            for (int j = 0; j < 4; j++){
-                System.out.print(g.field[i][j]);
+        g.operate(generations);
+        
+        f.GridToFile(g);
+
+
+
+        for (int i = 0; i < 20; i++){
+            for (int j = 0; j < 20; j++){
+                System.out.print(g.field[i][j] + " ");
             }
             System.out.println();
         }
