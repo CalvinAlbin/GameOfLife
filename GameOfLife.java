@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.*;
 
 public class GameOfLife{
@@ -20,20 +19,6 @@ public class GameOfLife{
         g.operate(generations);
         
         f.GridToFile(g);
-
-
-
-        for (int i = 0; i < 20; i++){
-            for (int j = 0; j < 20; j++){
-                System.out.print(g.field[i][j] + " ");
-            }
-            System.out.println();
-        }
-
-
-
-
-
 
         sc.close();
     }

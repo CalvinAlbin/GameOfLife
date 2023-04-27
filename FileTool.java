@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 public class FileTool{
 
@@ -26,7 +25,6 @@ public class FileTool{
                 in.read();
                 in.read();
             }
-
             in.close();
         }
         catch(Exception e){
