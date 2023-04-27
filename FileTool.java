@@ -3,12 +3,56 @@ import java.util.*;
 
 public class FileTool{
 
-    private FileInputStream in = null;
-    private FileOutputStream out = null;
+    private FileReader in = null;
+    private FileWriter out = null;
     public String fileName;
 
-    public void setName(String newName){
-        this.fileName = newName;
+
+    public void FileToGrid(Grid g){
+        try{
+            in = new FileReader("input4.txt");
+
+            char c;
+            for (int i = 0; i < 4; i++){
+                for (int j = 0; j < 4; j++){
+                    c = (char) in.read();
+                    if (c == 'X')
+                        g.field[i][j] = true;
+                    else
+                        g.field[i][j] = false;
+                }
+            }
+
+
+        }
+        catch(Exception e){
+            System.out.println("INCORRECT FILE NAME");
+            //System.exit(-1);
+        }
+        finally{
+
+        }
+
+
+
+
     }
+
+
+    public void GridToFile(){
+        try{
+            out = new FileWriter("output.txt");
+        }
+        catch(Exception e){
+            System.out.println("FILE ALREADY EXISTS");
+            System.exit(-1);
+        }
+        finally{
+
+        }
+
+    }
+
+
 
 }
