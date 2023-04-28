@@ -9,34 +9,24 @@ public class Grid {
             for (int t = 0; t < 20; t++){
                 field[s][t] = new Cell();
                 tempfield[s][t] = new Cell();
+                field[s][t].row = s;
+                field[s][t].col = t;
+                tempfield[s][t].row = s;
+                tempfield[s][t].col = t;
+                field[s][t].g = this;
+                tempfield[s][t].g = this;
             }
         }
     }
 
     public void operate(int generations){
 
-        int counter = 0;
         for (int i = 0; i < generations; i++){
             for (int j = 0; j < 20; j++){
                 for (int k = 0; k < 20; k++){
-                    counter = field[j][k].Count(j,k,this);
-                    System.out.print(counter + " ");
-                    if (counter  < 2)//Dead to underpopulation
-                        tempfield[j][k].status = false;
-                    else if (counter == 3)//living on or reproducing
-                        tempfield[j][k].status = true;
-                    else if (counter > 3)//Dying to overpopulation
-                        tempfield[j][k].status = false;
-                    else if (field[j][k].status == true)//living on if population is 2
-                        tempfield[j][k].status = true;
+                    field[j][k].changeStatus(j, k);
                 }
-                System.out.println();
             }
-            //copying tempfield to field
-            /*for (int l = 0; l < 20; l++){
-                System.arraycopy(tempfield[l],0,field[l],0,20);
-            }*/
-            System.out.println();
             for (int s = 0; s < 20; s++){
                 for (int t = 0; t < 20; t++){
                     field[s][t].status = tempfield[s][t].status;
