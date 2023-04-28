@@ -9,7 +9,6 @@ public class FileTool{
 
     public void FileToGrid(Grid g){
         try{
-            //in = new FileReader(fileName);
             in = new FileReader(fileName);
             BufferedReader reader = new BufferedReader(in);
 

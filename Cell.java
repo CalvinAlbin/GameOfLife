@@ -1,6 +1,6 @@
 
 
-public class Cell{
+public class Cell extends Thread{
     public boolean status;
     public int row;
     public int col;
@@ -28,16 +28,15 @@ public class Cell{
         return (g.field[r][c].status) ? 1 : 0;
     }
 
-    public void changeStatus(int j, int k){
+    public void run(){
         int counter = this.Count(row,col);
         if (counter  < 2)//Dead to underpopulation
-            g.tempfield[j][k].status = false;
+            g.tempfield[row][col].status = false;
          else if (counter == 3)//living on or reproducing
-              g.tempfield[j][k].status = true;
+              g.tempfield[row][col].status = true;
           else if (counter > 3)//Dying to overpopulation
-             g.tempfield[j][k].status = false;
-         else if (g.field[j][k].status == true)//living on if population is 2
-            g.tempfield[j][k].status = true;
-
+             g.tempfield[row][col].status = false;
+         else if (g.field[row][col].status == true)//living on if population is 2
+            g.tempfield[row][col].status = true;
     }
 }
