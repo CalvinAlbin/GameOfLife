@@ -1,11 +1,17 @@
-import java.util.ArrayList;
+
 
 public class Grid {
-    public boolean [][] field = new boolean[20][20];
-    public ArrayList<Integer> alive = new ArrayList<Integer>();
+    public Cell [][] field = new Cell[20][20];
+    public Cell [][] tempfield = new Cell[20][20];
 
-    public boolean [][] tempfield = new boolean[20][20];
-    public ArrayList<Integer> tempalive;
+    Grid(){
+        for (int s = 0; s < 20; s++){
+            for (int t = 0; t < 20; t++){
+                field[s][t] = new Cell();
+                tempfield[s][t] = new Cell();
+            }
+        }
+    }
 
     public void operate(int generations){
 
@@ -13,20 +19,28 @@ public class Grid {
         for (int i = 0; i < generations; i++){
             for (int j = 0; j < 20; j++){
                 for (int k = 0; k < 20; k++){
-                    counter = this.Count(j,k);
+                    counter = field[j][k].Count(j,k,this);
+                    System.out.print(counter + " ");
                     if (counter  < 2)//Dead to underpopulation
-                        tempfield[j][k] = false;
+                        tempfield[j][k].status = false;
                     else if (counter == 3)//living on or reproducing
-                        tempfield[j][k] = true;
+                        tempfield[j][k].status = true;
                     else if (counter > 3)//Dying to overpopulation
-                        tempfield[j][k] = false;
-                    else if (field[j][k] == true)//living on if population is 2
-                        tempfield[j][k] = true;
+                        tempfield[j][k].status = false;
+                    else if (field[j][k].status == true)//living on if population is 2
+                        tempfield[j][k].status = true;
                 }
+                System.out.println();
             }
             //copying tempfield to field
-            for (int l = 0; l < 20; l++){
+            /*for (int l = 0; l < 20; l++){
                 System.arraycopy(tempfield[l],0,field[l],0,20);
+            }*/
+            System.out.println();
+            for (int s = 0; s < 20; s++){
+                for (int t = 0; t < 20; t++){
+                    field[s][t].status = tempfield[s][t].status;
+                }
             }
         }
     }
@@ -51,6 +65,6 @@ public class Grid {
     public int live(int r, int c) {
         if (r < 0 || r >= 20) return 0;
         if (c < 0 || c >= 20) return 0;
-        return (field[r][c]) ? 1 : 0;
+        return (field[r][c].status) ? 1 : 0;
     }
 }
