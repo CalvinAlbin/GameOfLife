@@ -10,11 +10,14 @@ public class FileTool{
     public void FileToGrid(Grid g){
         try{
             in = new FileReader(fileName);
+            BufferedReader reader = new BufferedReader(in);
 
+            String s;
             char c;
             for (int i = 0; i < 20; i++){
+                s = reader.readLine();
                 for (int j = 0; j < 20; j++){
-                    c = (char) in.read();
+                    c = s.charAt(j);
                     if (c == 'X'){
                         g.field[i][j] = true;
                         g.alive.add((i*20 + j));
@@ -22,8 +25,6 @@ public class FileTool{
                     else
                         g.field[i][j] = false;
                 }
-                in.read();
-                in.read();
             }
             in.close();
         }
